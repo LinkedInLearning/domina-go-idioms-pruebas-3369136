@@ -26,11 +26,17 @@ DESCRIPCIÓN DEL CURSO
 
 ## Instrucciones
 
-Este repositorio tiene ramas (branches) para cada uno de los vídeos del curso. Puedes usar el menú emergente de la rama en GitHub para cambiar a una rama específica y echar un vistazo al curso en esa etapa, o puedes añadir `/tree/nombre_de_la_rama` a la URL para ir a la rama a la que quieres acceder.
+Este repositorio tiene directorios para cada uno de los vídeos del curso. Puedes usar el explorador de archivos en GitHub para cambiar a un directorio específico y echar un vistazo al curso en esa etapa, o puedes añadir `/tree/main/capitulo/video` a la URL para ir al directorio al que quieres acceder. Por ejemplo, puedes ir al directorio que contiene el código del segundo vídeo del tercer capítulo añadiendo `/tree/main/Ch3/03_02` a la URL.
 
 ## Ramas
 
-Las ramas están estructuradas para corresponder a los vídeos del curso. La convención de nomenclatura es Capítulo#_Vídeo#. Por ejemplo, la rama denominada `02_03` corresponde al segundo capítulo y al tercer vídeo de ese capítulo. Algunas ramas tendrán un estado inicial y otro final. Están marcadas con las letras i («inicio») y f («fin»). La branch i tiene el mismo código que al principio del vídeo. La branch f tiene el mismo código que al final del vídeo. La rama master tiene el estado final del código que aparece en el curso.
+El video consta de una única rama, la rama `main`.
+
+## Directorios
+
+Los directorios están estructurados para corresponder a los vídeos del curso. La convención de nomenclatura es Capítulo#_Vídeo#. Por ejemplo, el directorio denominado `02_03` corresponde al segundo capítulo y al tercer vídeo de ese capítulo. Algunos directorios podrían tener un estado inicial y otro final. Estarán marcados con las letras i («inicio») y f («fin»). El directorio `i` tiene el mismo código que al principio del vídeo. El directorio `f` tiene el mismo código que al final del vídeo.
+
+Para facilitar la navegación entre videos, cada capítulo tiene su propio directorio, Ch1, Ch2, etc., conservando la numeración de los vídeos tal y como se explica más arriba.
 
 ## Instalación
 
