@@ -1,6 +1,6 @@
 package main
 
-// type for functional options
+// tipo para opciones funcionales
 type PokemonOption func(*Pokemon)
 
 func WithAttack(attack int) PokemonOption {

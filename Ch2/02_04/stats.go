@@ -14,28 +14,28 @@ func Mean(numbers []float64) float64 {
 }
 
 func Median(numbers []float64) float64 {
-	// Sort the numbers in ascending order
+	// Ordenar los números en orden ascendente
 	slices.Sort(numbers)
 
-	// Calculate the median
+	// Calcular la mediana
 	medianIndex := len(numbers) / 2
 	return numbers[medianIndex]
 }
 
 func StandardDeviation(numbers []float64) float64 {
-	// Calculate the mean
+	// Calcular la media
 	mean := Mean(numbers)
 
-	// Calculate the sum of squared differences from the mean
+	// Calcula la suma de las diferencias al cuadrado de la media
 	sumSquaredDiff := 0.0
 	for _, num := range numbers {
 		diff := num - mean
 		sumSquaredDiff += diff * diff
 	}
 
-	// Calculate the variance
+	// Calcula la varianza
 	variance := sumSquaredDiff / float64(len(numbers))
 
-	// Calculate the standard deviation: the square root of the variance
+	// Calcula la desviación estándar: la raíz cuadrada de la varianza
 	return math.Sqrt(variance)
 }

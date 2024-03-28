@@ -12,7 +12,7 @@ func main() {
 
 	fmt.Println(pikachu)
 
-	// this pokemon has all the values
+	// este pokemon tiene todos los valores
 	pikachuWithOptions := NewPokemonWithOptions(
 		"Pikachu",
 		WithAttack(55), WithDefense(40), WithLife(35),
@@ -22,12 +22,12 @@ func main() {
 
 	fmt.Println(pikachuWithOptions)
 
-	// this pokemon has only the name
+	// este pokemon tiene solo el nombre
 	charmander := NewPokemonWithOptions("Charmander")
 
 	fmt.Println(charmander)
 
-	// this pokemon has only the name and the points
+	// este pokemon tiene solo el nombre y los puntos
 	charizard := NewPokemonWithOptions(
 		"Charizard",
 		WithAttack(84), WithDefense(78), WithLife(78),

@@ -12,12 +12,12 @@ func main() {
 		numbers = append(numbers, float64(i)*ran)
 	}
 
-	// Calculate the mean of the numbers
+	// Calcular la media de los números
 	log.Println("Mean:", Mean(numbers))
 
-	// Calculate the median of the numbers
+	// Calcular la mediana de los números
 	log.Println("Median:", Median(numbers))
 
-	// Calculate the standard deviation of the numbers
+	// Calcular la desviación estándar de los números
 	log.Println("Standard Deviation:", StandardDeviation(numbers))
 }
