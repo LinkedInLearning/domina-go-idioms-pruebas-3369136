@@ -28,6 +28,10 @@ DESCRIPCIÓN DEL CURSO
 
 Este repositorio tiene directorios para cada uno de los vídeos del curso. Puedes usar el explorador de archivos en GitHub para cambiar a un directorio específico y echar un vistazo al curso en esa etapa, o puedes añadir `/tree/main/capitulo/video` a la URL para ir al directorio al que quieres acceder. Por ejemplo, puedes ir al directorio que contiene el código del segundo vídeo del tercer capítulo añadiendo `/tree/main/Ch3/03_02` a la URL.
 
+## Diapositivas
+
+Puedes encontrar las diapositivas del curso aquí: https://docs.google.com/presentation/d/1Da40974DoOz9qorGY1DyjCu6DdVF7biuQU2WVEfOOME/edit?usp=sharing
+
 ## Ramas
 
 El video consta de una única rama, la rama `main`.
