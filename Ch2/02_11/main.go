@@ -3,11 +3,11 @@ package main
 import "math/rand"
 
 func main() {
-	waitForPokemon()
+	teamRocket()
 
-	pokemonGym()
+	quickCapture()
 
-	ambushPokemon()
+	retryCapture()
 }
 
 type Pokemon struct {

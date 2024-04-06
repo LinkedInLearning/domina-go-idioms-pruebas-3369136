@@ -1,23 +1,58 @@
 package main
 
-import (
-	"log"
-	"math/rand"
-)
+import "fmt"
 
 func main() {
-	var numbers []float64
-	for i := 0; i < 100; i++ {
-		ran := rand.Float64() * 100
-		numbers = append(numbers, float64(i)*ran)
-	}
+	pointerVariables()
 
-	// Calcular la media de los números
-	log.Println("Mean:", Mean(numbers))
+	structPointers()
+}
 
-	// Calcular la mediana de los números
-	log.Println("Median:", Median(numbers))
+func structPointers() {
+	// este pokemon se inicializa usando semántica de puntero
+	pikachu := NewPokemonPointer(
+		"Pikachu",
+		WithAttack(55), WithDefense(40), WithLife(35),
+		WithTypes([]string{"Electric"}),
+		WithMoves([]string{"Quick Attack", "Thunderbolt"}),
+	)
 
-	// Calcular la desviación estándar de los números
-	log.Println("Standard Deviation:", StandardDeviation(numbers))
+	fmt.Println(pikachu) // pikachu se modifica, puesto que se pasó un puntero
+
+	// este pokemon se inicializa usando semántica de valor
+	charmander := NewPokemonValue(
+		"Charmander",
+		WithAttackValue(52), WithDefenseValue(43), WithLifeValue(39),
+		WithTypesValue([]string{"Fire"}),
+		WithMovesValue([]string{"Ember", "Flamethrower"}),
+	)
+
+	fmt.Println(charmander) // charmander no se modifica, puesto que se pasó una copia
+}
+
+type Pokemon struct {
+	Name    string
+	Attack  int
+	Defense int
+	Life    int
+	Types   []string
+	Moves   []string
+}
+
+func pointerVariables() {
+	// entero a almacenar
+	var valor = 17
+
+	// puntero apunta a la dirección de memoria de valor
+	var puntero *int = &valor
+
+	fmt.Println("valor almacenado:", valor)
+	fmt.Println("dirección del valor entero:", &valor)
+	fmt.Println("lo que el puntero almacena:", puntero)
+
+	// actualiza el valor usando el operador de dereferenciación
+	*puntero = 71
+
+	fmt.Println("lo que el valorEntero almacena ahora:", valor) // cambia el valor
+	fmt.Println("dirección del valor entero:", &valor)          // misma dirección de memoria
 }

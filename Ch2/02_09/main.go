@@ -1,44 +1,71 @@
 package main
 
-// Este ejemplo provoca de manera intencionada un deadlock, ya que no hay un receptor para el valor enviado.
-// Sirva como ejemplo de cómo se definen los channels y cómo se utilizan.
+import "math/rand"
+
 func main() {
+	waitForPokemon()
 
-	// un channel sin buffer,
-	// por lo que bloqueará si no hay un receptor
-	//channel := make(chan int)
+	pokemonGym()
 
-	// un channel con buffer de tamaño 10,
-	// que únicamente bloqueará si se llena.
-	bufferedChannel := make(chan int, 10)
+	ambushPokemon()
+}
 
-	// vamos a enviar un valor al channel
+type Pokemon struct {
+	Name    string
+	Attack  int
+	Defense int
+	Life    int
+	Types   []string
+	Moves   []string
+}
 
-	// esto bloqueará hasta que haya un receptor
-	//channel <- 1
+func Pikachu() Pokemon {
+	return Pokemon{
+		Name:    "Pikachu",
+		Attack:  55,
+		Defense: 40,
+		Life:    35,
+		Types:   []string{"Electric"},
+		Moves:   []string{"Thunder Shock", "Quick Attack"},
+	}
+}
 
-	// esto no bloqueará, ya que hay espacio en el buffer
-	bufferedChannel <- 1
+func Charmander() Pokemon {
+	return Pokemon{
+		Name:    "Charmander",
+		Attack:  52,
+		Defense: 43,
+		Life:    39,
+		Types:   []string{"Fire"},
+		Moves:   []string{"Ember", "Scratch"},
+	}
+}
 
-	// un channel únicamente de envío
-	sendChannel := make(<-chan int)
+func Bulbasaur() Pokemon {
+	return Pokemon{
+		Name:    "Bulbasaur",
+		Attack:  49,
+		Defense: 49,
+		Life:    45,
+		Types:   []string{"Grass", "Poison"},
+		Moves:   []string{"Vine Whip", "Tackle"},
+	}
+}
 
-	// el channel enviará un valor desde sendChannel a algún otro receptor
-	<-sendChannel
-	// sendChannel <- 1 // operación no permitida, por tanto no compilará
+func Squirtle() Pokemon {
+	return Pokemon{
+		Name:    "Squirtle",
+		Attack:  48,
+		Defense: 65,
+		Life:    44,
+		Types:   []string{"Water"},
+		Moves:   []string{"Water Gun", "Tackle"},
+	}
+}
 
-	// un channel únicamente de recepción
-	receiveChannel := make(chan<- int)
-
-	// el channel recibirá un valor desde algún otro emisor a receiveChannel
-	receiveChannel <- 1
-	// <-receiveChannel // operación no permitida, por tanto no compilará
-
-	// un channel tanto de envío como de recepción
-	receiveSendChannel := make(chan int)
-
-	// el channel podrá tanto enviar como recibir un valor desde algún otro emisor o receptor
-
-	receiveSendChannel <- 1
-	<-receiveSendChannel
+// PokemonAppears simula la aparición de un pokemon de los cuatro posibles,
+// devolviendo un pokemon aleatorio.
+func PokemonAppears() Pokemon {
+	pokemons := []Pokemon{Pikachu(), Charmander(), Bulbasaur(), Squirtle()}
+	return pokemons[rand.Intn(4)]
 }

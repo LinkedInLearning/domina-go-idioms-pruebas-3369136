@@ -1,92 +1,44 @@
 package main
 
-import (
-	"context"
-	"fmt"
-	"time"
-)
-
+// Este ejemplo provoca de manera intencionada un deadlock, ya que no hay un receptor para el valor enviado.
+// Sirva como ejemplo de cómo se definen los channels y cómo se utilizan.
 func main() {
-	contextBackground()
 
-	contextCancellable()
+	// un channel sin buffer,
+	// por lo que bloqueará si no hay un receptor
+	//channel := make(chan int)
 
-	contextTimeout()
+	// un channel con buffer de tamaño 10,
+	// que únicamente bloqueará si se llena.
+	bufferedChannel := make(chan int, 10)
 
-	contextDeadline()
+	// vamos a enviar un valor al channel
 
-	contextWithValues()
-}
+	// esto bloqueará hasta que haya un receptor
+	//channel <- 1
 
-func contextBackground() {
-	err := httpCall(context.Background())
-	if err != nil {
-		fmt.Println("Error making request:", err)
-	}
-}
+	// esto no bloqueará, ya que hay espacio en el buffer
+	bufferedChannel <- 1
 
-func contextCancellable() {
-	// ahora vamos a hacer una petición con un contexto que se cancela
-	ctx, cancel := context.WithCancel(context.Background())
-	cancel() // forzamos la cancelación del contexto para simular un error
+	// un channel únicamente de envío
+	sendChannel := make(<-chan int)
 
-	// el mensaje de Request completed nunca se imprimirá,
-	// con un mensaje de error "context canceled".
-	err := httpCall(ctx)
-	if err != nil {
-		fmt.Println("Error making request:", err)
-	}
-}
+	// el channel enviará un valor desde sendChannel a algún otro receptor
+	<-sendChannel
+	// sendChannel <- 1 // operación no permitida, por tanto no compilará
 
-func contextTimeout() {
-	// ahora vamos a hacer una petición con un contexto
-	// que expira pasados 1 milisegundo
-	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Millisecond)
-	// aseguramos que se llame a cancel al final de la ejecución
-	// y lo hacemos en un defer para que se ejecute siempre al final
-	// de la ejecución de la función main
-	defer cancel()
+	// un channel únicamente de recepción
+	receiveChannel := make(chan<- int)
 
-	// el mensaje de Request completed nunca se imprimirá,
-	// con un mensaje de error "context deadline exceeded".
-	err := httpCall(ctx)
-	if err != nil {
-		fmt.Println("Error making request:", err)
-	}
-}
+	// el channel recibirá un valor desde algún otro emisor a receiveChannel
+	receiveChannel <- 1
+	// <-receiveChannel // operación no permitida, por tanto no compilará
 
-func contextDeadline() {
-	// ahora vamos a hacer una petición con un contexto
-	// que expira pasados 1 milisegundo
-	deadline := time.Now().Add(1 * time.Millisecond)
-	ctx, cancel := context.WithDeadline(context.Background(), deadline)
-	// aseguramos que se llame a cancel al final de la ejecución
-	// y lo hacemos en un defer para que se ejecute siempre al final
-	// de la ejecución de la función main
-	defer cancel()
+	// un channel tanto de envío como de recepción
+	receiveSendChannel := make(chan int)
 
-	// el mensaje de Request completed nunca se imprimirá,
-	// con un mensaje de error "context deadline exceeded".
-	err := httpCall(ctx)
-	if err != nil {
-		fmt.Println("Error making request:", err)
-	}
-}
+	// el channel podrá tanto enviar como recibir un valor desde algún otro emisor o receptor
 
-func contextWithValues() {
-	// ahora vamos a hacer una petición con un contexto
-	// que expira pasados 10 segundos
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	// aseguramos que se llame a cancel al final de la ejecución
-	// y lo hacemos en un defer para que se ejecute siempre al final
-	// de la ejecución de la función main
-	defer cancel()
-
-	// vamos a añadir un valor al contexto
-	ctx = context.WithValue(ctx, currentPokemonKey, "pikachu")
-
-	err := httpCallWithContextValue(ctx)
-	if err != nil {
-		fmt.Println("Error making request:", err)
-	}
+	receiveSendChannel <- 1
+	<-receiveSendChannel
 }

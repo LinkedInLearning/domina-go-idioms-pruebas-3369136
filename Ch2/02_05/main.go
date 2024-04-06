@@ -1,59 +1,92 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+	"time"
+)
 
 func main() {
-	pikachu := NewPokemon(
-		"Pikachu",
-		55, 40, 35,
-		[]string{"Electric"},
-		[]string{"Quick Attack", "Thunderbolt"},
-	)
+	contextBackground()
 
-	fmt.Println(pikachu)
+	contextCancellable()
 
-	// este pokemon tiene todos los valores
-	pikachuWithOptions := NewPokemonWithOptions(
-		"Pikachu",
-		WithAttack(55), WithDefense(40), WithLife(35),
-		WithTypes([]string{"Electric"}),
-		WithMoves([]string{"Quick Attack", "Thunderbolt"}),
-	)
+	contextTimeout()
 
-	fmt.Println(pikachuWithOptions)
+	contextDeadline()
 
-	// este pokemon tiene solo el nombre
-	charmander := NewPokemonWithOptions("Charmander")
-
-	fmt.Println(charmander)
-
-	// este pokemon tiene solo el nombre y los puntos
-	charizard := NewPokemonWithOptions(
-		"Charizard",
-		WithAttack(84), WithDefense(78), WithLife(78),
-	)
-
-	fmt.Println(charizard)
+	contextWithValues()
 }
 
-type Pokemon struct {
-	Name    string
-	Attack  int
-	Defense int
-	Life    int
-	Types   []string
-	Moves   []string
+func contextBackground() {
+	err := httpCall(context.Background())
+	if err != nil {
+		fmt.Println("Error making request:", err)
+	}
 }
 
-func NewPokemon(name string, attack int, defense int, life int,
-	types []string, moves []string) *Pokemon {
+func contextCancellable() {
+	// ahora vamos a hacer una petición con un contexto que se cancela
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel() // forzamos la cancelación del contexto para simular un error
 
-	return &Pokemon{
-		Name:    name,
-		Attack:  attack,
-		Defense: defense,
-		Life:    life,
-		Types:   types,
-		Moves:   moves,
+	// el mensaje de Request completed nunca se imprimirá,
+	// con un mensaje de error "context canceled".
+	err := httpCall(ctx)
+	if err != nil {
+		fmt.Println("Error making request:", err)
+	}
+}
+
+func contextTimeout() {
+	// ahora vamos a hacer una petición con un contexto
+	// que expira pasados 1 milisegundo
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Millisecond)
+	// aseguramos que se llame a cancel al final de la ejecución
+	// y lo hacemos en un defer para que se ejecute siempre al final
+	// de la ejecución de la función main
+	defer cancel()
+
+	// el mensaje de Request completed nunca se imprimirá,
+	// con un mensaje de error "context deadline exceeded".
+	err := httpCall(ctx)
+	if err != nil {
+		fmt.Println("Error making request:", err)
+	}
+}
+
+func contextDeadline() {
+	// ahora vamos a hacer una petición con un contexto
+	// que expira pasados 1 milisegundo
+	deadline := time.Now().Add(1 * time.Millisecond)
+	ctx, cancel := context.WithDeadline(context.Background(), deadline)
+	// aseguramos que se llame a cancel al final de la ejecución
+	// y lo hacemos en un defer para que se ejecute siempre al final
+	// de la ejecución de la función main
+	defer cancel()
+
+	// el mensaje de Request completed nunca se imprimirá,
+	// con un mensaje de error "context deadline exceeded".
+	err := httpCall(ctx)
+	if err != nil {
+		fmt.Println("Error making request:", err)
+	}
+}
+
+func contextWithValues() {
+	// ahora vamos a hacer una petición con un contexto
+	// que expira pasados 10 segundos
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	// aseguramos que se llame a cancel al final de la ejecución
+	// y lo hacemos en un defer para que se ejecute siempre al final
+	// de la ejecución de la función main
+	defer cancel()
+
+	// vamos a añadir un valor al contexto
+	ctx = context.WithValue(ctx, currentPokemonKey, "pikachu")
+
+	err := httpCallWithContextValue(ctx)
+	if err != nil {
+		fmt.Println("Error making request:", err)
 	}
 }

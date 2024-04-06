@@ -1,3 +1,3 @@
-module github.com/linkedinlearning/domina-go/channels-store
+module github.com/linkedinlearning/domina-go/goroutines
 
 go 1.21
