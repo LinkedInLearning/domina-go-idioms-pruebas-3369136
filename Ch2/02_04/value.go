@@ -6,35 +6,40 @@ package main
 // Como veremos, ésto nos permite modificar la estructura original, pero
 // al finalizar la función, la estructura original no se modifica, puesto
 // que estamos pasando una copia de la estructura.
-type PokemonValueOption func(Pokemon)
+type PokemonValueOption func(Pokemon) error
 
 func WithAttackValue(attack int) PokemonValueOption {
-	return func(p Pokemon) {
+	return func(p Pokemon) error {
 		p.Attack = attack
+		return nil
 	}
 }
 
 func WithDefenseValue(defense int) PokemonValueOption {
-	return func(p Pokemon) {
+	return func(p Pokemon) error {
 		p.Defense = defense
+		return nil
 	}
 }
 
 func WithLifeValue(life int) PokemonValueOption {
-	return func(p Pokemon) {
+	return func(p Pokemon) error {
 		p.Life = life
+		return nil
 	}
 }
 
 func WithMovesValue(moves []string) PokemonValueOption {
-	return func(p Pokemon) {
+	return func(p Pokemon) error {
 		p.Moves = moves
+		return nil
 	}
 }
 
 func WithTypesValue(types []string) PokemonValueOption {
-	return func(p Pokemon) {
+	return func(p Pokemon) error {
 		p.Types = types
+		return nil
 	}
 }
 
@@ -44,7 +49,9 @@ func NewPokemonValue(name string, opts ...PokemonValueOption) Pokemon {
 	}
 
 	for _, opt := range opts {
-		opt(p)
+		if err := opt(p); err != nil {
+			return Pokemon{}
+		}
 	}
 
 	return p
