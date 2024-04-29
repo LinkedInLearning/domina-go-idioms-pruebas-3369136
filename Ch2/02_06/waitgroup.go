@@ -5,25 +5,8 @@ import (
 	"sync"
 )
 
-type WaitGroupCounter struct {
-	value int
-	mutex sync.Mutex
-}
-
-func (c *WaitGroupCounter) Increment() {
-	c.mutex.Lock()
-	defer c.mutex.Unlock()
-	c.value++
-}
-
-func (c *WaitGroupCounter) GetValue() int {
-	c.mutex.Lock()
-	defer c.mutex.Unlock()
-	return c.value
-}
-
 func waitGroupCounter() {
-	counter := WaitGroupCounter{}
+	counter := Counter{}
 
 	var wg sync.WaitGroup
 
