@@ -6,8 +6,8 @@ import (
 )
 
 type Player struct {
-	Player   trainer.Trainer   `json:"player"`
-	Pokemons []pokemon.Pokemon `json:"pokemons"`
+	Player   trainer.Trainer
+	Pokemons []pokemon.Pokemon
 }
 
 func (p *Player) Name() string {
