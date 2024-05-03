@@ -15,5 +15,5 @@ var mainPlayer = player.Player{
 }
 
 func Welcome(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Bienvenido %s a la captura de pokemons! Empezarás con tu %d pokemons", mainPlayer.Name(), len(mainPlayer.Pokemons))
+	fmt.Fprintf(w, "Bienvenido %s a la captura de pokemons! Empezarás con %d pokemons: %v", mainPlayer.Name(), len(mainPlayer.Pokemons), mainPlayer.Pokemons)
 }
