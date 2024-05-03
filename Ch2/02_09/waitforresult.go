@@ -21,7 +21,4 @@ func waitForPokemon() {
 
 	pokemon := <-ch
 	fmt.Printf("hilo principal : señal de pokemon capturado recibida, es un %s!\n", pokemon.Name)
-
-	// esperamos un segundo para que la goroutine pueda producir el pokemon
-	time.Sleep(time.Second)
 }
