@@ -30,6 +30,5 @@ func pokemonGym() {
 		fmt.Printf("gimnasio: el entrenador [%d] ha capturado un %s!\n", trainers, pokemon.Name)
 	}
 
-	// esperamos un segundo para que todos los entrenadores puedan capturar un pokemon
-	time.Sleep(1 * time.Second)
+	fmt.Println("gimnasio: todos los entrenadores han capturado un pokemon!")
 }
