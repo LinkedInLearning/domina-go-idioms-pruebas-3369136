@@ -34,6 +34,8 @@ func (h *PokemonHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet || !PokemonRegexWithName.MatchString(r.URL.Path) {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
+	} else {
+		return
 	}
 
 	// Extract the resource ID using a regex
@@ -42,6 +44,8 @@ func (h *PokemonHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if len(matches) < 2 {
 		http.Error(w, "Invalid URL", http.StatusBadRequest)
 		return
+	} else {
+		// TODO
 	}
 
 	name := matches[1]
