@@ -30,6 +30,9 @@ type PokemonScenario struct {
 	trainer Trainer
 }
 
+// función que inicializa el escenario con los pasos que se van a ejecutar
+// En ella se inicializa el trainer con 5 pokeballs y se resetean los pokemons capturados,
+// y además definimos tanto los pasos del escenario como lo que va a ocurrir antes y después de cada escenario.
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	// Inicializamos el escenario con un trainer y 5 pokeballs
 	scenario := &PokemonScenario{
@@ -52,27 +55,29 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	// definimos los pasos del escenario, utilizando expresiones regulares,
 	// que se corresponden con los pasos de los feature files, conectando
 	// con el código Go que implementa cada paso.
-	ctx.Given(`^a Pokémon appears$`, scenario.pokemonAppears)
-	ctx.Given(`^the Pokémon is friendly$`, scenario.pokemonIsFriendly)
-	ctx.Given(`^the Pokémon is not friendly$`, scenario.pokemonIsNotFriendly)
+	ctx.Given(`^a Pokemon appears$`, scenario.pokemonAppears)
+	ctx.Given(`^the Pokemon is friendly$`, scenario.pokemonIsFriendly)
+	ctx.Given(`^the Pokemon is not friendly$`, scenario.pokemonIsNotFriendly)
 	ctx.Given(`^the trainer has no pokeballs$`, scenario.trainerHasNoPokeballs)
-	ctx.When(`^the trainer tries to capture the Pokémon$`, scenario.trainerTriesToCapture)
-	ctx.Then(`^the Pokémon is captured$`, scenario.pokemonIsCaptured)
-	ctx.Then(`^the Pokémon escapes$`, scenario.pokemonEscapes)
+	ctx.When(`^the trainer tries to capture the Pokemon$`, scenario.trainerTriesToCapture)
+	ctx.Then(`^the Pokemon is captured$`, scenario.pokemonIsCaptured)
+	ctx.Then(`^the Pokemon escapes$`, scenario.pokemonEscapes)
 }
 
+// vamos a forzar que el pokemon sea amigable
 func (s *PokemonScenario) pokemonIsFriendly() error {
-	// vamos a forzar que el pokemon sea amigable
 	s.pokemon.Friendly = true
 	return nil
 }
 
+// vamos a forzar que el pokemon NO sea amigable
 func (s *PokemonScenario) pokemonIsNotFriendly() error {
-	// vamos a forzar que el pokemon NO sea amigable
 	s.pokemon.Friendly = false
 	return nil
 }
 
+// función que simula la captura de un pokemon por parte de un trainer,
+// llamando al método Capture del trainer y comprobando si la captura es exitosa.
 func (s *PokemonScenario) trainerTriesToCapture() error {
 	friendly := s.pokemon.Friendly
 	hasPokeballs := s.trainer.Pokeballs > 0
@@ -106,14 +111,14 @@ func (s *PokemonScenario) trainerTriesToCapture() error {
 	return nil
 }
 
+// forzamos que el trainer no tenga pokeballs
 func (s *PokemonScenario) trainerHasNoPokeballs() error {
-	// forzamos que el trainer no tenga pokeballs
 	s.trainer.Pokeballs = 0
 	return nil
 }
 
+// comprobamos que el pokemon capturado sea el mismo que el que apareció
 func (s *PokemonScenario) pokemonIsCaptured() error {
-	// comprobamos que el pokemon capturado sea el mismo que el que apareció
 	if s.trainer.CapturedPokemons[0].Name != s.pokemon.Name {
 		return fmt.Errorf("captured pokemon is not the same as the one that appeared")
 	}
@@ -121,13 +126,14 @@ func (s *PokemonScenario) pokemonIsCaptured() error {
 	return nil
 }
 
+// aparece un pokemon nuevo
 func (s *PokemonScenario) pokemonAppears() error {
-	s.pokemon = PokemonAppears() // aparece un pokemon nuevo
+	s.pokemon = PokemonAppears()
 	return nil
 }
 
+// recorremos la lista de pokemons capturados para comprobar que no está el pokemon que apareció
 func (s *PokemonScenario) pokemonEscapes() error {
-	// recorremos la lista de pokemons capturados para comprobar que no está el pokemon que apareció
 	for _, p := range s.trainer.CapturedPokemons {
 		if p.Name == s.pokemon.Name {
 			return fmt.Errorf("captured pokemon should not be the same as the one that appeared")
