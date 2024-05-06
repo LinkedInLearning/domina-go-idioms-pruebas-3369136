@@ -30,15 +30,6 @@ func structPointers() {
 	fmt.Println(charmander) // charmander no se modifica, puesto que se pasó una copia
 }
 
-type Pokemon struct {
-	Name    string
-	Attack  int
-	Defense int
-	Life    int
-	Types   []string
-	Moves   []string
-}
-
 func pointerVariables() {
 	// entero a almacenar
 	var valor = 17
