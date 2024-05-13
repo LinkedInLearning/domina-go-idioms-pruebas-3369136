@@ -5,19 +5,19 @@ import (
 	"math/rand"
 )
 
-func main() {}
-
-// PokemonAppears simula la aparición de un pokemon de los cuatro posibles,
-// devolviendo un pokemon aleatorio.
-func PokemonAppears() Pokemon {
-	pokemons := []Pokemon{Pikachu(), Charmander(), Bulbasaur(), Squirtle()}
-	p := pokemons[rand.Intn(4)]
-
-	if p.Friendly {
-		log.Printf("A friendly %s appears!\n", p.Name)
-		return p
+func main() {
+	var numbers []float64
+	for i := 0; i < 100; i++ {
+		ran := rand.Float64() * 100
+		numbers = append(numbers, float64(i)*ran)
 	}
 
-	log.Printf("A wild %s appears!\n", p.Name)
-	return p
+	// Calcula la media de los números
+	log.Println("Mean:", mean(numbers))
+
+	// Calcula la mediana de los números
+	log.Println("Median:", median(numbers))
+
+	// Calcula la desviación estándar de los números
+	log.Println("Standard Deviation:", standardDeviation(numbers))
 }
