@@ -5,10 +5,10 @@ import "fmt"
 func main() {
 	pointerVariables()
 
-	structPointers()
+	structVariables()
 }
 
-func structPointers() {
+func structVariables() {
 	// este pokemon se inicializa usando semántica de puntero
 	pikachu := NewPokemonPointer(
 		"Pikachu",
