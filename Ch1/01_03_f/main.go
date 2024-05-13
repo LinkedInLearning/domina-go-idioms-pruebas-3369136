@@ -9,5 +9,5 @@ import (
 func main() {
 	log.Println("Bienvenido a la captura de pokemons!")
 	internal.CapturePokemon()
-	log.Println("Bye!")
+	log.Println("El pokemon ha sido capturado y añadido a tu pokedex!")
 }
