@@ -11,7 +11,6 @@ import (
 var port int = 8080
 
 func main() {
-	log.Printf("Starting Pokemon service at port %d...\n", port)
 	err := run(port)
 	if err != nil {
 		log.Fatal(err)
@@ -19,6 +18,8 @@ func main() {
 }
 
 func run(port int) error {
+	log.Printf("Starting Pokemon service at port %d...\n", port)
+
 	http.HandleFunc("/pokemon", api.Welcome)
 
 	return http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
