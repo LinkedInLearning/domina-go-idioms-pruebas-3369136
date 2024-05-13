@@ -3,19 +3,22 @@ package main
 import (
 	"fmt"
 
-	"github.com/linkedinlearning/domina-go/package-layout/geometry"
+	"github.com/linkedinlearning/domina-go/package-layout/pokemon"
 )
 
 func main() {
-	c := geometry.NewCircle(1, 2, 3)
-	fmt.Println(c)
+	pikachu := pokemon.Pikachu()
+	fmt.Println(pikachu)
 
-	tr := geometry.NewTriangle(1, 2, 3, 4, 5, 6)
-	fmt.Println(tr)
+	charmander := pokemon.Charmander()
+	fmt.Println(charmander)
 
-	p := geometry.NewParallellogram(1, 2, 3, 4)
-	fmt.Println(p)
+	bulbasaur := pokemon.Bulbasaur()
+	fmt.Println(bulbasaur)
 
-	point := geometry.point{}
-	fmt.Println(point)
+	squirtle := pokemon.Squirtle()
+	fmt.Println(squirtle)
+
+	pokeType := pokemon.pokemonType("Electric")
+	fmt.Println(pokeType)
 }
