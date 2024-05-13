@@ -2,7 +2,8 @@ package main
 
 import "fmt"
 
-// tipo para opciones funcionales
+// tipo para opciones funcionales: es una función que recibe un puntero
+// al pokemon a modificar, y retorna un error en caso de encontrarlo.
 type PokemonOption func(*Pokemon) error
 
 func WithAttack(attack int) PokemonOption {
