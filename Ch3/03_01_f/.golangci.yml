@@ -8,5 +8,5 @@ linters-settings:
   staticcheck:
     checks:
       - all
-      - '-SA1000' # disable the rule SA1000
-      - '-SA1004' # disable the rule SA1004
+      - '-SA1000' # disable the rule SA1000 - Invalid regular expression
+      - '-SA1004' # disable the rule SA1004 - Suspiciously small untyped constant in time.Sleep
