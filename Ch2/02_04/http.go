@@ -42,7 +42,7 @@ func httpCallWithContextValue(ctx context.Context) error {
 
 	// recuperamos del contexto el valor que añadimos
 	currentPokemon := ctx.Value(currentPokemonKey).(string)
-	fmt.Println("Current pokemon is", currentPokemon)
+	fmt.Println("Context with values: Current pokemon is", currentPokemon)
 
 	res, err := httpCli.Do(req.WithContext(ctx))
 	if err != nil {
@@ -50,6 +50,6 @@ func httpCallWithContextValue(ctx context.Context) error {
 	}
 	defer res.Body.Close()
 
-	fmt.Println("Request completed:", res.Status)
+	fmt.Println("Context with values: Request completed:", res.Status)
 	return nil
 }

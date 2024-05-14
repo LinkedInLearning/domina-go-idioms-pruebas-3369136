@@ -20,6 +20,6 @@ func contextWithValues() {
 
 	err := httpCallWithContextValue(ctx)
 	if err != nil {
-		fmt.Println("Error making request:", err)
+		fmt.Println("Context with values: Error making request:", err)
 	}
 }
