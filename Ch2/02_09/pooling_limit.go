@@ -26,7 +26,7 @@ func pokemonIncursionLimit() {
 	ch := make(chan Pokemon, g)
 
 	// para cada entrenador, creamos una goroutine que espera a que un pokemon aparezca en el canal
-	for c := 0; c < g; c++ {
+	for t := 0; t < g; t++ {
 		go func(trainer int) {
 			// cuando la goroutine termine, al retirarse, decrementamos el contador de WaitGroup
 			defer wg.Done()
@@ -36,7 +36,7 @@ func pokemonIncursionLimit() {
 				fmt.Printf("entrenador [%d] ha capturado un pokemon. Es un %s!\n", trainer, pokemon.Name)
 			}
 			fmt.Printf("entrenador [%d] se retira\n", trainer)
-		}(c)
+		}(t)
 	}
 
 	// señalamos en el canal que un pokemon ha aparecido

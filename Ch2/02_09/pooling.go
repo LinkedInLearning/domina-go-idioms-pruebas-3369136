@@ -8,21 +8,22 @@ import (
 
 // pokemonIncursion: simula una batalla de pokemons, en la que unos cuantos entrenadores intentan capturar pokemons.
 // Cada entrenador es una goroutine que intenta capturar un pokemon y señala en un canal que ha capturado un pokemon.
-// Una vez que todos los pokemons han sido capturados, la battalla termina.
+// Una vez que todos los pokemons han sido capturados, la batalla termina.
 func pokemonIncursion() {
 	ch := make(chan Pokemon)
 
 	// creamos un pool de entrenadores, una por cada CPU
 	g := runtime.GOMAXPROCS(0)
 	fmt.Printf("gimnasio: se han creado %d entrenadores\n", g)
-	for c := 0; c < g; c++ {
+
+	for t := 0; t < g; t++ {
 		go func(trainer int) {
 			// la goroutine espera a que un pokemon aparezca en el canal
 			for pokemon := range ch {
 				fmt.Printf("entrenador [%d] ha capturado un pokemon. Es un %s!\n", trainer, pokemon.Name)
 			}
 			fmt.Printf("entrenador [%d] se retira\n", trainer)
-		}(c)
+		}(t)
 	}
 
 	// van a aparecer 100 pokemons

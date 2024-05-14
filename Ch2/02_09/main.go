@@ -5,7 +5,7 @@ import "math/rand"
 func main() {
 	pokemonIncursion()
 
-	pokemonIncursionLimit()
+	//pokemonIncursionLimit()
 }
 
 type Pokemon struct {
