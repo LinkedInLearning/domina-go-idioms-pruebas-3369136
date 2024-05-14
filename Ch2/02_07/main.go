@@ -1,19 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
-func main() {
-	go func() {
-		fmt.Println("Hola, mundo!")
-	}()
-
-	go hello()
-
-	fmt.Println("Adiós, mundo!")
-}
-
-func hello() {
-	fmt.Println("Hola, gophers!")
-}
+// Este ejemplo provoca de manera intencionada un deadlock, ya que no hay un receptor para el valor enviado.
+// Sirva como ejemplo de cómo se definen los channels y cómo se utilizan.
+func main() {}

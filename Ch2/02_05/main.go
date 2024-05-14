@@ -1,13 +1,11 @@
 package main
 
 func main() {
-	contextBackground()
+	mutexCounter()
 
-	contextCancellable()
+	waitGroupCounter()
 
-	contextTimeout()
-
-	contextDeadline()
-
-	contextWithValues()
+	for i := 0; i < 10; i++ {
+		createFirstPokemon()
+	}
 }

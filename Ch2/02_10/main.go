@@ -3,9 +3,11 @@ package main
 import "math/rand"
 
 func main() {
-	pokemonIncursion()
+	teamRocket()
 
-	pokemonIncursionLimit()
+	quickCapture()
+
+	retryCapture()
 }
 
 type Pokemon struct {

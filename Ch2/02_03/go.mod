@@ -1,3 +1,3 @@
-module github.com/linkedinlearning/domina-go/functional-options
+module github.com/linkedinlearning/domina-go/pointers
 
 go 1.21

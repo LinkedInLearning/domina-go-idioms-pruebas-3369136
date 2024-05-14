@@ -1,11 +1,19 @@
 package main
 
+import (
+	"fmt"
+)
+
 func main() {
-	mutexCounter()
+	go func() {
+		fmt.Println("Hola, mundo!")
+	}()
 
-	waitGroupCounter()
+	go hello()
 
-	for i := 0; i < 10; i++ {
-		createFirstPokemon()
-	}
+	fmt.Println("Adiós, mundo!")
+}
+
+func hello() {
+	fmt.Println("Hola, gophers!")
 }
