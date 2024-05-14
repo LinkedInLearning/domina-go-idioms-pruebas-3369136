@@ -1,6 +1,6 @@
 linters:
   enable:
-    - revive
+    - revive # golint ha sido deprecado, revive es su reemplazo
     - govet
     - staticcheck
 
