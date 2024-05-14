@@ -7,15 +7,28 @@ import (
 	"time"
 )
 
+// vamos a reintentar una captura en tres situaciones diferentes:
+// - la primera asegurando que siempre falle
+// - la segunda fallando pero porque la función de captura agota el tiempo de espera.
+// - y la última, que siempre se consiga.
 func retryCapture() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
+	fmt.Println("=========== 1: siempre falla")
 	retryCaptureWithInterval(ctx, time.Second, func(ctx context.Context) error {
 		// esta función siempre fallará la captura
 		return errors.New("la captura ha fallado")
 	})
 
+	fmt.Println("=========== 2: falla porque la captura es muy lenta")
+	retryCaptureWithInterval(ctx, time.Second, func(ctx context.Context) error {
+		// 3 segundos para agotar el tiempo de espera en la segunda iteración
+		time.Sleep(3 * time.Second)
+		return fmt.Errorf("tiempo de espera agotado")
+	})
+
+	fmt.Println("=========== 3: siempre se consigue")
 	retryCaptureWithInterval(ctx, time.Second, func(ctx context.Context) error {
 		// esta función siempre conseguirá la captura
 		return nil
