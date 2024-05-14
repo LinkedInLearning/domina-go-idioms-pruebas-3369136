@@ -18,15 +18,18 @@ func pokemonIncursion() {
 
 	for t := 0; t < g; t++ {
 		go func(trainer int) {
+			count := 0
 			// la goroutine espera a que un pokemon aparezca en el canal
 			for pokemon := range ch {
 				fmt.Printf("entrenador [%d] ha capturado un pokemon. Es un %s!\n", trainer, pokemon.Name)
+				count++
 			}
-			fmt.Printf("entrenador [%d] se retira\n", trainer)
+			fmt.Printf("entrenador [%d] se retira con %d pokemons\n", trainer, count)
 		}(t)
 	}
 
-	// van a aparecer 100 pokemons
+	// En el hilo principal aparecerán 100 pokemons,
+	// que serán enviados al canal de comunicación.
 	const work = 100
 	for w := 1; w <= work; w++ {
 		// señalamos en el canal que un pokemon ha aparecido
