@@ -20,9 +20,6 @@ func contextDeadline() {
 	// con un mensaje de error "context deadline exceeded".
 	err := httpCall(ctx)
 	if err != nil {
-		fmt.Println("Context with Deadline: Error making request:", err)
-		return
+		fmt.Println("Error making request:", err)
 	}
-
-	fmt.Println("Context with Deadline: Success!")
 }

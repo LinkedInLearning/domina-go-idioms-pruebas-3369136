@@ -14,9 +14,6 @@ func contextCancellable() {
 	// con un mensaje de error "context canceled".
 	err := httpCall(ctx)
 	if err != nil {
-		fmt.Println("Context cancellable: Error making request:", err)
-		return
+		fmt.Println("Error making request:", err)
 	}
-
-	fmt.Println("Context cancellable: Success!")
 }
