@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-// pokemonIncursion: simula una batalla de pokemons, en la que unos cuantos entrenadores intentan capturar pokemons.
+// pokemonIncursion: simula una incursión, en la que unos cuantos entrenadores intentan capturar pokemons.
 // Cada entrenador es una goroutine que intenta capturar un pokemon y señala en un canal que ha capturado un pokemon.
-// Una vez que todos los pokemons han sido capturados, la batalla termina.
+// Una vez que todos los pokemons han sido capturados, la incursión termina.
 func pokemonIncursion() {
 	ch := make(chan Pokemon)
 
@@ -39,7 +39,7 @@ func pokemonIncursion() {
 
 	// cerramos el canal para que las goroutines puedan terminar
 	close(ch)
-	fmt.Println("gimnasio: termina la batalla de pokemons")
+	fmt.Println("gimnasio: termina la incursión")
 
 	// esperamos un segundo para que las goroutines puedan capturar los pokemons
 	time.Sleep(time.Second)
