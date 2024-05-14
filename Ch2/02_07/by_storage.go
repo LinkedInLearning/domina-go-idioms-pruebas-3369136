@@ -1,7 +1,9 @@
 package main
 
+// Channels según el tipo de almacenamiento
+
 func unbufferedChannel() {
-	// un channel sin buffer,
+	// un channel sin buffer que envia/recibe enteros,
 	// por lo que bloqueará si no hay un receptor
 	channel := make(chan int)
 
@@ -12,7 +14,7 @@ func unbufferedChannel() {
 }
 
 func bufferedChannel() {
-	// un channel con buffer de tamaño 10,
+	// un channel con buffer de tamaño 10, que envia/recibe enteros,
 	// que únicamente bloqueará si se llena.
 	bufferedChannel := make(chan int, 10)
 
