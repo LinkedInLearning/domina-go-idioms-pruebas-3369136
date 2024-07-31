@@ -50,10 +50,10 @@ Para facilitar la navegación entre videos, cada capítulo tiene su propio direc
 
 **Manuel de la Peña**
 
-Echa un vistazo a mis otros cursos en [LinkedIn Learning](https://www.linkedin.com/learning/instructors/).
+Echa un vistazo a mis otros cursos en [LinkedIn Learning](https://www.linkedin.com/learning/instructors/manuel-de-la-pena).
 
 [0]: # (Replace these placeholder URLs with actual course URLs)
-[lil-course-url]: https://www.linkedin.com
-[lil-thumbnail-url]: https:
+[lil-course-url]: https://www.linkedin.com/learning/domina-go-idioms-y-pruebas-de-codigo/
+[lil-thumbnail-url]: https://media.licdn.com/dms/image/D4E0DAQE31psoDDn-Pw/learning-public-crop_675_1200/0/1722416476560?e=2147483647&v=beta&t=9XaFwV0hs0YbF2b8MSWxiGsr0dqEKLsF_C35-Ni9xQ4
 
 [1]: # (End of ES-Instruction ###############################################################################################)
